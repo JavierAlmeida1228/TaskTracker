@@ -1,0 +1,26 @@
+﻿@page
+@model TaskTracker.Pages.TasksModel
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+<h2>Task List</h2>
+
+<form method="post">
+    <input asp-for="NewTask.Title" placeholder="Enter new task" />
+    <button type="submit">Add Task</button>
+</form>
+
+<ul>
+    @foreach (var task in Model.TaskItems)
+    {
+        <li>
+            <form method="post" asp-page-handler="Toggle" asp-route-id="@task.TaskItemId">
+                <button type="submit">
+                    @(task.IsComplete ? "✅" : "⬜")
+                </button>
+            </form>
+            @task.Title
+        </li>
+    }
+</ul>
