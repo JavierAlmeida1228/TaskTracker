@@ -19,7 +19,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 38.46.230.15
-          username: Jalmeida
+          username: jalmeida
           password: 9BemGqEa
           port: 22
           script: |
