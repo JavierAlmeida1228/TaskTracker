@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using TaskTracker.Data;
 using TaskTracker.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,27 +15,26 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Remove HTTPS redirection for Docker
+// app.UseHttpsRedirection();
 
+app.UseStaticFiles();        // Required for Razor Pages
 app.UseRouting();
-
 app.UseAuthorization();
 
-app.MapStaticAssets();
 app.MapRazorPages();
+
+// Redirect root → /Tasks (assignment requirement)
 app.MapGet("/", context =>
 {
     context.Response.Redirect("/Tasks");
     return Task.CompletedTask;
 });
 
-
-
-
+// Minimal API endpoints (assignment requirement)
 app.MapGet("/api/tasks", async (AppDbContext db) =>
     await db.TaskItems.ToListAsync());
 
