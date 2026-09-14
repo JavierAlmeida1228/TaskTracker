@@ -1,7 +1,7 @@
 services:
   backend:
-    build: ./Backend/TaskTrackerAPI
+    build: .
     ports:
       - "80:8080"
     volumes:
-      - ./Backend/TaskTrackerAPI/tasktracker.db:/app/tasktracker.db
+      - ./tasktracker.db:/app/tasktracker.db
