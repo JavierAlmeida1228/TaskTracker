@@ -1,7 +1,9 @@
 services:
   backend:
-    build: .
+    build:
+      context: ./Backend/TaskTrackerAPI
+      dockerfile: Dockerfile
     ports:
       - "80:8080"
     volumes:
-      - ./tasktracker.db:/app/tasktracker.db
+      - ./Backend/TaskTrackerAPI/tasktracker.db:/app/tasktracker.db
